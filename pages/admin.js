@@ -53,7 +53,7 @@ function Admin() {
                                 Works
                             </button>
                         </div>
-                        <Link href={`/${userName?.replace(/\s+/g, '') + '-' + userId}`} target="_blank" className="flex gap-2 items-center">
+                        <Link href={`/${userName + '-' + userId}`} target="_blank" className="flex gap-2 items-center">
                             <span className="hidden min-[400px]:block">View Portfolio</span>
                             <img src="/images/view.png" alt="" className="w-4" />
                         </Link>

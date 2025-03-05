@@ -8,16 +8,18 @@ export const runtime = "experimental-edge";
 
 export default function Login() {
   const router = useRouter();
-  const [checkingAuth, setCheckingAuth] = useState(true); // New state to prevent flickering
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
-    if (token) {
-      router.push("/admin");
-    } else {
-      setCheckingAuth(false); // Only show login form after checking token
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("auth_token");
+      if (token) {
+        router.push("/admin");
+      } else {
+        setCheckingAuth(false);
+      }
     }
   }, []);
 
@@ -31,7 +33,7 @@ export default function Login() {
       if (!token) {
         throw new Error("Invalid credentials");
       }
-      localStorage.setItem("auth_token", token); // Ensure token is saved
+      localStorage.setItem("auth_token", token);
       router.push("/admin");
     } catch (err) {
       console.error("Error:", err);
@@ -41,9 +43,8 @@ export default function Login() {
     }
   };
 
-  // Don't render login form until auth check is complete
   if (checkingAuth) {
-    return null; // Or a loading spinner
+    return null;
   }
 
   return (

@@ -2,6 +2,17 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const getUserId = () => localStorage.getItem('user_id');
 
+export const fetchUsers = async (pageNum) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users?page=${pageNum}`);
+    const data = await response.json();
+    if (data?.errors) throw new Error(data.errors[0].message);
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
 export const fetchUserData = async (id) => {
   const userId = getUserId();
   if (!id && !userId) {

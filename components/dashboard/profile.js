@@ -67,8 +67,7 @@ export default function Profile({ data, refreshUserData }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("auth_token");
+    localStorage.clear();
     router.push("/login");
   };
 

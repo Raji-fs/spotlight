@@ -1,6 +1,4 @@
-import Header from "@/components/Header";
 import Layout from "@/components/Layout";
-import Link from "next/link";
 export const runtime = "experimental-edge";
 
 export default function Home() {
